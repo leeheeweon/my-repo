@@ -21,24 +21,29 @@ public class Controller {
         return "index";
     }
 
+    @GetMapping("mainPage")
+    public String main() {
+        return "/basic/mainPage";
+    }
+
     @PostMapping("/login")
-    public String login(Long id, String password, RedirectAttributes redirectAttributes) {
+    public String login(Long id, String password) {
         Optional<Member> member = memberRepository.checkLogin(id, password);
         System.out.println("member = " + member.toString());
         if (member.isEmpty()) {
             return "redirect:login";
         } else {
-            return "redirect:/members";
+            return "redirect:mainPage";
         }
     }
 
     @GetMapping("/join")
     public String joinPage() {
-        return "join";
+        return "/basic/join";
     }
 
     @PostMapping("/join")
-    public String join(Member member, RedirectAttributes redirectAttributes) {
+    public String join(Member member) {
         Member save = memberRepository.save(member);
         System.out.println("save = " + save);
         return "redirect:/login";
