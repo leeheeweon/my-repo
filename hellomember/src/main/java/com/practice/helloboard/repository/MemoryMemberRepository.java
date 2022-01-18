@@ -42,6 +42,18 @@ public class MemoryMemberRepository implements MemberRepository {
         return new ArrayList<>(store.values());
     }
 
+    @Override
+    public void updateMember(long seq, Member member) {
+        Member findBySeqMember = findBySeq(seq);
+        findBySeqMember.setId(member.getId());
+        findBySeqMember.setName(member.getName());
+    }
+
+    @Override
+    public void deleteMember(long seq) {
+        store.remove(seq);
+    }
+
     public void storeClear() {
         store.clear();
     }

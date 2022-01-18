@@ -60,5 +60,13 @@ class MemoryMemberRepositoryTest {
         Assertions.assertThat(saveMember).isEqualTo(checkedMember);
     }
 
+//    @Test
+//    void findBySeq() {
+//        Member member = new Member("123", "lee", "123");
+//        Optional<Member> saveMember = Optional.ofNullable(memberRepository.save(member));
+//        Member findBySeqMember = memberRepository.findBySeq(member.getSequence());
+//        Assertions.assertThat(findBySeqMember).isEqualTo(saveMember);
+//    }
+
 
 }
