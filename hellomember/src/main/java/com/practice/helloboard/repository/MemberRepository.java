@@ -8,9 +8,11 @@ import java.util.Optional;
 public interface MemberRepository {
     Member save (Member member);
 
-    Optional<Member> findById(Long id);
+    Optional<Member> findById(String id);
 
-    Optional<Member> checkLogin(Long id , String password);
+    Member findBySeq(long seq);
+
+    Optional<Member> checkLogin(String id , String password);
 
     Optional<Member> findByName(String name);
 

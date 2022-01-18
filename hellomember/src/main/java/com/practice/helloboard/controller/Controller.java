@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.annotation.PostConstruct;
 import java.util.Optional;
 
 @org.springframework.stereotype.Controller
@@ -27,7 +28,7 @@ public class Controller {
     }
 
     @PostMapping("/login")
-    public String login(Long id, String password) {
+    public String login(String id, String password) {
         Optional<Member> member = memberRepository.checkLogin(id, password);
         System.out.println("member = " + member.toString());
         if (member.isEmpty()) {
@@ -43,11 +44,21 @@ public class Controller {
     }
 
     @PostMapping("/join")
-    public String join(Member member) {
+    public String join(Member member, RedirectAttributes redirectAttributes) {
         Member save = memberRepository.save(member);
-        System.out.println("save = " + save);
-        return "redirect:/login";
+        redirectAttributes.addAttribute("name", save.getName());
+        return "redirect:/joinsuccess";
     }
 
+    @GetMapping("/joinsuccess")
+    public String joinSuccess() {
+        return "/basic/joinSuccess";
+    }
 
+    @PostConstruct
+    private void init() {
+        memberRepository.save(new Member("limiter1", "leeheeweon1", "1111"));
+        memberRepository.save(new Member("limiter2", "leeheeweon2", "1111"));
+        memberRepository.save(new Member("limiter3", "leeheeweon3", "1111"));
+    }
 }

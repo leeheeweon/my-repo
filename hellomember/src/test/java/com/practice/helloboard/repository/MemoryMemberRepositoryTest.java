@@ -21,7 +21,7 @@ class MemoryMemberRepositoryTest {
 
     @Test
     void save(){
-        Member member = new Member(123L, "lee", "123");
+        Member member = new Member("123", "lee", "123");
         Optional<Member> saveMember = Optional.ofNullable(memberRepository.save(member));
         System.out.println("member = " + member.getId());
         Optional<Member> findMember = memberRepository.findById(member.getId());
@@ -30,8 +30,8 @@ class MemoryMemberRepositoryTest {
 
     @Test
     void findAll() {
-        Member member1 = new Member(123L, "lee1", "123");
-        Member member2 = new Member(1234L, "lee2", "1234");
+        Member member1 = new Member("123", "lee1", "123");
+        Member member2 = new Member("1234", "lee2", "1234");
 
         memberRepository.save(member1);
         memberRepository.save(member2);
@@ -43,7 +43,7 @@ class MemoryMemberRepositoryTest {
 
     @Test
     void findByName() {
-        Member member = new Member(123L, "lee", "123");
+        Member member = new Member("123", "lee", "123");
         Optional<Member> saveMember = Optional.ofNullable(memberRepository.save(member));
 
         Optional<Member> findByNameMember = memberRepository.findByName(member.getName());
@@ -53,10 +53,10 @@ class MemoryMemberRepositoryTest {
 
     @Test
     void checkLogin() {
-        Member member = new Member(123L, "lee", "123");
+        Member member = new Member("123", "lee", "123");
         Optional<Member> saveMember = Optional.ofNullable(memberRepository.save(member));
 
-        Optional<Member> checkedMember = memberRepository.checkLogin(123L, "123");
+        Optional<Member> checkedMember = memberRepository.checkLogin("123", "123");
         Assertions.assertThat(saveMember).isEqualTo(checkedMember);
     }
 

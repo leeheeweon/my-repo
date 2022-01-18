@@ -18,12 +18,17 @@ public class MemoryMemberRepository implements MemberRepository {
     }
 
     @Override
-    public Optional<Member> findById(Long id) {
+    public Optional<Member> findById(String id) {
         return store.values().stream().filter(member -> member.getId().equals(id)).findAny();
     }
 
     @Override
-    public Optional<Member> checkLogin(Long id, String password) {
+    public Member findBySeq(long seq) {
+        return store.get(seq);
+    }
+
+    @Override
+    public Optional<Member> checkLogin(String id, String password) {
        return store.values().stream().filter(member -> member.getId().equals(id) && member.getPassword().equals(password)).findAny();
     }
 
